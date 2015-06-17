@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+
+<head>
+<title>Register</title>
+
+<link rel="stylesheet" th:href="@{/css/auth/login.css}" />
+</head>
+
+<body>
+  <div layout:fragment="content" class="container">
+
+    <p th:if="${param.logout}" class="alert">You have been logged out</p>
+
+    <ul th:replace="auth/fragments/authtabs :: tabs('register')"></ul>
+
+    <form class="form-auth form-register" th:action="@{/auth/register}" th:object="${registerViewModel}" method="POST">
+      <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+        <ul style="padding: 5px">
+          <li th:each="error : ${#fields.errors('*')}" th:text="${error} + '.'">Validation error</li>
+        </ul>
+      </div>
+
+      <div th:class="${#fields.hasErrors('username')} ? 'has-error form-group' : 'form-group'">
+        <label for="username" class="sr-only">Username</label>
+        <input th:field="*{username}" type="text" class="form-control" placeholder="Username" required="true"
+          autofocus="true" maxlength="20" />
+      </div>
+
+      <div th:class="${#fields.hasErrors('emailAddress')} ? 'has-error form-group' : 'form-group'">
+        <label for="emailAddress" class="sr-only">Email</label>
+        <input th:field="*{emailAddress}" type="email" class="form-control" placeholder="Email"
+          th:class="${#fields.hasErrors('emailAddress')} ? 'field-error form-control' : 'form-control'" required="true"
+          maxlength="128" />
+      </div>
+
+      <div th:class="${#fields.hasErrors('password')} ? 'has-error form-group' : 'form-group'">
+        <label for="password" class="sr-only">Password</label>
+        <input th:field="*{password}" type="password" class="form-control" placeholder="Password"
+          th:class="${#fields.hasErrors('password')} ? 'field-error form-control' : 'form-control'" required="true"
+          maxlength="128" />
+      </div>
+
+      <div th:class="${#fields.hasErrors('passwordRepeat')} ? 'has-error form-group' : 'form-group'">
+        <label for="passwordRepeat" class="sr-only">Repeat Password</label>
+        <input th:field="*{passwordRepeat}" type="password" class="form-control" placeholder="Repeat Password"
+          th:class="${#fields.hasErrors('passwordRepeat')} ? 'field-error form-control' : 'form-control'"
+          required="true" maxlength="128" />
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    </form>
+
+  </div>
+</body>
+
+</html>

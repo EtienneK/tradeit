@@ -1,0 +1,16 @@
+<html>
+<head></head>
+<body>
+  <ul class="nav nav-tabs" th:fragment="tabs(activeTab)">
+
+    <li th:class="${activeTab == 'login'} ? 'active'" role="presentation"><a
+      th:href="@{/auth/login}"><span class="glyphicon glyphicon-log-in"
+        aria-hidden="true"></span> Log In</a></li>
+
+    <li th:class="${activeTab == 'register'} ? 'active'" role="presentation"><a
+      th:href="@{/auth/register}"><span class="glyphicon glyphicon-plus-sign"
+        aria-hidden="true"></span> Register</a></li>
+
+  </ul>
+</body>
+</html>

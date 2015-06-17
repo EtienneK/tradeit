@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+
+<head>
+<title>Trade Board Games - TradeIt South Africa</title>
+
+</head>
+
+<body>
+  <div layout:fragment="content" class="container">
+
+    <h1 th:text="${query}"></h1>
+
+    <ul th:each="item : ${items}">
+      <li th:text="${item.names[0].valueAsString + ' (' + item.yearPublished + ')'}" />
+    </ul>
+    
+  </div>
+</body>
+
+</html>

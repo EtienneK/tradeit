@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+
+  <div th:fragment="input" th:class="${#fields.hasErrors(field)} ? 'has-error form-group' : 'form-group'">
+    <label class="col-sm-4 control-label" for="field" th:text="${fieldLabel} + (${required} != 'false' ? ' *' : '')"></label>
+    <div class="col-sm-4">
+      <input th:field="*{__${field}__}" th:type="${type} ? ${type} : 'text'" class="form-control"
+        th:placeholder="${fieldLabel}" th:required="${required} == 'false' ? 'false' : 'true'"
+        th:autofocus="${autofocus} ? ${autofocus} : 'false'" th:maxlength="${maxlength} ? ${maxlength} : '128'" />
+    </div>
+  </div>
+
+  <div th:fragment="button" class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <button class="btn btn-lg btn-primary" th:type="${type} ? ${type} : 'submit'" th:text="${label}"></button>
+    </div>
+  </div>
+
+  <div th:fragment="errors" th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+    <ul style="padding: 5px">
+      <li th:each="error : ${#fields.errors('*')}" th:text="${error} + '.'">Validation error</li>
+    </ul>
+  </div>
+
+</body>
+</html>
