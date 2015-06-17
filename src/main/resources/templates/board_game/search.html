@@ -12,7 +12,7 @@
     <h1 th:text="${query}"></h1>
 
     <ul th:each="item : ${items}">
-      <li th:text="${item.names[0].valueAsString + ' (' + item.yearPublished + ')'}" />
+      <li th:text="${item.names[0].valueAsString + ' (' + (item.yearPublished != null ? item.yearPublished : 'unknown') + ')'}" />
     </ul>
     
   </div>
